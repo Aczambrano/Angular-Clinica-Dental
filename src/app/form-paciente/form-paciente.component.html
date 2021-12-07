@@ -1,0 +1,268 @@
+<div class="container">
+  <div class="row">
+    <div class="col s5">
+      <div class="card">
+        <div class="card-content">
+          <form
+            #patientsForm="ngForm"
+            (ngSubmit)="createPatients(patientsForm)"
+          >
+            <div class="row">
+              <div class="input-field col s12">
+                <input
+                  type="hidden"
+                  name="_id"
+                  #_id="ngModel"
+                  [(ngModel)]="patientsService.selectedPatients._id"
+                />
+              </div>
+
+              <div class="input-field col s5">
+                <input
+                  name="nombre"
+                  type="text"
+                  class="validate"
+                  #nombre="ngModel"
+                  [(ngModel)]="patientsService.selectedPatients.nombre"
+                  placeholder="Ingrese sus nombres"
+                  required
+                  maxlength="30"
+                />
+                <label for="nombre">Nombres</label>
+                <span
+                  class="helper-text"
+                  data-error="Este campo es requerido"
+                  data-success="Listo"
+                  >Ingrese sus nombres completos
+                </span>
+              </div>
+
+              <div class="input-field col s5">
+                <input
+                  name="apellido"
+                  type="text"
+                  class="validate"
+                  #apellido="ngModel"
+                  [(ngModel)]="patientsService.selectedPatients.apellido"
+                  placeholder="Ingrese sus apellidos"
+                  required
+                  maxlength="30"
+                />
+                <label for="apellido">Apellidos</label>
+                <span
+                  class="helper-text"
+                  data-error="Este campo es requerido"
+                  data-success="Listo"
+                  >Ingrese sus apellidos completos</span
+                >
+              </div>
+
+              <div class="input-field col s5">
+                <input
+                  name="cedula"
+                  type="text"
+                  class="validate"
+                  #cedula="ngModel"
+                  required
+                  maxlength="10"
+                  minlength="10"
+                  [(ngModel)]="patientsService.selectedPatients.cedula"
+                  placeholder="Cédula o pasaporte"
+                />
+                <label for="cedula">Cedula</label>
+                <span
+                  class="helper-text"
+                  data-error="Número de cédula incorrecto"
+                  data-success="Listo"
+                  >Ingrese su cedula o pasaporte</span
+                >
+              </div>
+
+              <div class="input-field col s5">
+                <input
+                  name="email"
+                  type="email"
+                  class="validate"
+                  #email="ngModel"
+                  [(ngModel)]="patientsService.selectedPatients.email"
+                  placeholder="Correo electrónico"
+                  required
+                />
+                <label for="email">Correo electrónico</label>
+                <span
+                  class="helper-text"
+                  data-error="Correo electónico inválido"
+                  data-success="Listo"
+                  >Ingrese un correo electónico válido</span
+                >
+              </div>
+
+              <div class="input-field col s5">
+                <input
+                  name="edad"
+                  type="number"
+                  class="validate"
+                  
+                  #edad="ngModel"
+                  [(ngModel)]="patientsService.selectedPatients.edad"
+                  placeholder="Ingrese su edad"
+                  required
+                  min="15"
+                  max="80"
+                />
+                <label for="edad">Edad</label>
+                <span
+                  class="helper-text"
+                  data-error="Error al ingresar la edad"
+                  data-success="Listo"
+                  >Ingrese su edad actual</span
+                >
+              </div>
+
+              <div class="input-field col s5">
+                <div><label>Género: </label></div>
+                <div>
+                  <p>
+                    <label>
+                      <input
+                        class="with-gap"
+                        type="radio"
+                        class="validate"        
+                        required                
+                        checked
+                        name="sexo"
+                        #sexo="ngModel"
+                        [(ngModel)]="patientsService.selectedPatients.sexo"
+                        value="Masculino"
+                      />
+                      <span>Masculino</span>
+                    </label>
+                  </p>
+                </div>
+
+                <div>
+                  <p>
+                    <label>
+                      <input
+                        class="with-gap"
+                        class="validate"
+                        required              
+                        type="radio"
+                        checked
+                        type="radio"
+                        name="sexo"
+                        #sexo="ngModel"
+                        [(ngModel)]="patientsService.selectedPatients.sexo"
+                        value="Femenino"
+                      />
+                      <span>Femenino</span>
+                    </label>
+                  </p>
+                </div>
+              </div>
+
+              <div class="input-field col s5">
+                <div><label>¿Tiene seguro?: </label></div>
+                <div>
+                  <p>
+                    <label>
+                      <input
+                        class="with-gap"
+                        type="radio"
+                        class="validate"
+                        checked
+                        name="seguro"
+                        #seguro="ngModel"
+                        [(ngModel)]="patientsService.selectedPatients.seguro"
+                        value="Si"
+                      />
+                      <span>Si</span>
+                    </label>
+                  </p>
+                </div>
+
+                <div>
+                  <p>
+                    <label>
+                      <input
+                        class="with-gap"
+                        type="radio"
+                        class="validate"
+
+                        checked
+                        type="radio"
+                        name="seguro"
+                        #seguro="ngModel"
+                        [(ngModel)]="patientsService.selectedPatients.seguro"
+                        value="No"
+                      />
+                      <span>No</span>
+                    </label>
+                  </p>
+                </div>
+              </div>
+
+              <div class="input-field col s12">
+                <select name="servicio" #servicio="ngModel" [(ngModel)]="patientsService.selectedPatients.servicio" required>
+                  <option value="" disabled >Elija un servicio</option>
+                  <option value="{{servicio}}" *ngFor="let servicio of tiposServicios">
+                    {{servicio}}
+                  </option>
+                </select>
+                <label for="">Tipo de servicio</label>
+              </div>
+
+              <div class="card-action">
+                <div class="input-field col s12">
+                  <button class="btn  " id="btn-css">Guardar</button>
+                  <button
+                    class="btn right blue"
+                    (click)="resetForm(patientsForm)"
+                  >
+                    Limpiar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col s7">
+      <table>
+        <thead>
+          <th>Nombres</th>
+          <th>Apellidos</th>
+          <th>Cedula</th>
+          <th>Email</th>
+          <th>Edad</th>
+          <th>Sexo</th>
+          <th>Seguro</th>
+          <th>Tipo de Servicio</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let patients of patientsService.patients">
+            <td>{{ patients.nombre }}</td>
+            <td>{{ patients.apellido }}</td>
+            <td>{{ patients.cedula }}</td>
+            <td>{{ patients.email }}</td>
+            <td>{{ patients.edad }}</td>
+            <td>{{ patients.sexo }}</td>
+            <td>{{ patients.seguro }}</td>
+            <td>{{ patients.servicio }}</td>
+            <td>
+              <a (click)="updatePatients(patients)"
+                ><i class="material-icons">border_color</i></a
+              >
+            </td>
+            <td>
+              <a (click)="deletePatients(patients._id)"
+                ><i class="material-icons">delete</i></a
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
